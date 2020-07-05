@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r setenv, echo=FALSE, message=FALSE}
+devtools::install_github("FlorianHandke/coursera_building_r_packages")
 library(farsdata)
 ```
 
