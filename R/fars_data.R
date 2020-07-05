@@ -6,11 +6,10 @@
 #'
 #' @param filename A character string defing the filename to be loaded
 #'
-#' @import base
 #' @importFrom readr read_csv
-#' @importFrom dplyr tbl_df
+#' @importFrom tibble as_tibble
 #'
-#' @return A tbl_df object. If the filename does not excist an error returns.
+#' @return A tibble object. If the filename does not excist an error returns.
 #'
 #' @examples
 #' fars_read("accident_2013.csv.bz2")
@@ -18,12 +17,14 @@
 #'
 #' @export
 fars_read <- function(filename) {
-  if(!file.exists(filename))
+  if(!file.exists(system.file("data", filename,
+                              package = "farsdata")))
     stop("file '", filename, "' does not exist")
   data <- suppressMessages({
-    readr::read_csv(filename, progress = FALSE)
+    readr::read_csv(system.file("data", filename,
+                                package = "farsdata"), progress = FALSE)
   })
-  dplyr::tbl_df(data)
+  tibble::as_tibble(data)
 }
 
 #' Creating a filename
@@ -32,8 +33,6 @@ fars_read <- function(filename) {
 #' Therefore the selected year is embedded in a standardised file name format
 #'
 #' @param year A integer value defining the corresponding year
-#'
-#' @importFrom base as.integer sprintf
 #'
 #' @return Returning a string with the full filename
 #'
@@ -53,9 +52,9 @@ make_filename <- function(year) {
 #'
 #' @param years A vector of integer values defining years to be loaded
 #'
-#' @import base
 #' @importFrom readr read_csv
-#' @importFrom dplyr tbl_df
+#' @importFrom tibble as_tibble
+#' @import magrittr
 #'
 #' @return Returning lists of dataframes - one per defined year -
 #' with the columns MONTH and year. If the year is invalid an error returns.
@@ -85,10 +84,11 @@ fars_read_years <- function(years) {
 #' Therefore \code{\link{fars_read_years}} is used.
 #' To exceute the functions the following functions need to be imported:
 #'
-#' @inheritParams years
+#' @param years A vector of integer values defining years to be loaded
 #'
-#' @importFrom dplyr bind_rows group_by summarize
+#' @importFrom dplyr bind_rows group_by summarize n
 #' @importFrom tidyr spread
+#' @import magrittr
 #'
 #' @return Returning a dataframe with the summarized injuries.
 #' Month will be shown as rows and years as columns
@@ -102,7 +102,7 @@ fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
     dplyr::group_by(year, MONTH) %>%
-    dplyr::summarize(n = n()) %>%
+    dplyr::summarize(n = dplyr::n()) %>%
     tidyr::spread(year, n)
 }
 
@@ -114,12 +114,10 @@ fars_summarize_years <- function(years) {
 #' @param state.num A numeric value defining the number wanted to be analysed.
 #' Possible entries are 1 to 56
 #'
-#' @inheritParams year
+#' @param year A integer value defining the corresponding year
 #'
-#' @import base
 #' @importFrom maps map
 #' @importFrom dplyr filter
-#' @importFrom grpahics points
 #'
 #' @return Returning a plot which shows the accidents as points in a state map.
 #' If the '\code{state.num}' is invalid an error returns.
@@ -127,7 +125,7 @@ fars_summarize_years <- function(years) {
 #'
 #' @examples
 #' fars_map_state(1, 2013)
-#' fars_map_state(30, 2013)#'
+#' fars_map_state(30, 2013)
 #'
 #' @export
 fars_map_state <- function(state.num, year) {

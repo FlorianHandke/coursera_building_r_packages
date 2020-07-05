@@ -71,6 +71,6 @@ State ID numbers can be found [here](https://crashstats.nhtsa.dot.gov/Api/Public
 
 ```{r mapping_crashes}
 library(mapdata)
-fars_map_state(44, 2012)
+fars_map_state(44, 2014)
 fars_map_state(8, 2013)
 ```
