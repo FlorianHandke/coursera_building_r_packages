@@ -5,14 +5,9 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to the farsdata-package}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-```{r setenv, echo=FALSE, message=FALSE}
-suppressPackageStartupMessages(devtools::install_github("FlorianHandke/coursera_building_r_packages"))
-library(farsdata)
-```
 
 This package is primarily built for educational purposes. The package enables one to explore fatal traffic accidents from 2013-2015 using data from the National Highway Traffic Safety Administration (NHTSA) Fatality Analysis Reporting System (FARS).  
 
