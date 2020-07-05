@@ -20,8 +20,8 @@ This package is primarily built for educational purposes. The package enables on
 The data in this package come from the National Highway Traffic Safety Administration (NHTSA) Fatality Analysis Reporting System (FARS) data.
 
 ```{r sample2013_data}
-filename_2013 <- make_filename(2013)
-fars_read(filename_2013) 
+filename_2013 <- farsdata::make_filename(2013)
+farsdata::fars_read(filename_2013) 
 ```
 
 You can find detail information of the data on [NHTSA FARS Manuals & Documentation page](https://crashstats.nhtsa.dot.gov/#/DocumentTypeList/4). 
@@ -35,7 +35,7 @@ Loading the data can be done by using the  `make_filename()` and `fars_read()` f
 Use the `make_filename` command to find out where data is stored on your machine and/or create a filename to save/load new data.
 
 ```{r make_filename}
-make_filename(2014)
+farsdata::make_filename(2014)
 ```
 
 ### Single Year
@@ -43,7 +43,7 @@ make_filename(2014)
 Loading data for a signele year can be done by using the function `fars_read_years()` with a single year as input. The only data columns selected are `MONTH` and `year`.  This returns a list of length one, and the first element in the list is the `tbl_df` (the `tidyverse` data frame) listing the month and year for each fatal accident.
 
 ```{r single_year}
-fars_read_years(years = 2014)[[1]]
+farsdata::fars_read_years(years = 2014)[[1]]
 ```
 
 ### Multiple Years
@@ -51,7 +51,7 @@ fars_read_years(years = 2014)[[1]]
 Loading multiple years can be done the function `fars_read_years()`.
 
 ```{r multiple_years}
-fars_read_years(years = 2013:2014)
+farsdata::fars_read_years(years = 2013:2014)
 ```
 
 ## Summarizing FARS Data
@@ -59,7 +59,7 @@ fars_read_years(years = 2013:2014)
 The `fars_summarize_years()` function produces a summary of the simple counts of fatalities by month and year: 
 
 ```{r summarize_data}
-fars_summarize_years(2013:2014)
+farsdata::fars_summarize_years(2013:2014)
 ```
 
 
@@ -71,6 +71,6 @@ State ID numbers can be found [here](https://crashstats.nhtsa.dot.gov/Api/Public
 
 ```{r mapping_crashes}
 library(mapdata)
-fars_map_state(44, 2014)
-fars_map_state(8, 2013)
+farsdata::fars_map_state(44, 2014)
+farsdata::fars_map_state(8, 2013)
 ```
