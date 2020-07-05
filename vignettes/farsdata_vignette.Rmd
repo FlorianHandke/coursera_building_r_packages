@@ -4,13 +4,13 @@ author: "Florian Handke"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to the farsdata-package}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setenv, echo=FALSE, message=FALSE}
-devtools::install_github("FlorianHandke/coursera_building_r_packages")
+suppressPackageStartupMessages(devtools::install_github("FlorianHandke/coursera_building_r_packages"))
 library(farsdata)
 ```
 
