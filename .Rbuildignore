@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^README\.Rmd$
+^vignettes$
+^farsdata_vignette\.Rmd$
