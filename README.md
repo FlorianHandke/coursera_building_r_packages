@@ -2,6 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # farsdata
+[![Build Status](https://travis-ci.org/FlorianHandke/coursera_building_r_packages.svg?branch=master)
 
 <!-- badges: start -->
 
