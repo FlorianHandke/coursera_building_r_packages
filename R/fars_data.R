@@ -17,11 +17,11 @@
 #'
 #' @export
 fars_read <- function(filename) {
-  if(!file.exists(system.file("data", filename,
+  if(!file.exists(system.file("extdata", filename,
                               package = "farsdata")))
     stop("file '", filename, "' does not exist")
   data <- suppressMessages({
-    readr::read_csv(system.file("data", filename,
+    readr::read_csv(system.file("extdata", filename,
                                 package = "farsdata"), progress = FALSE)
   })
   tibble::as_tibble(data)
